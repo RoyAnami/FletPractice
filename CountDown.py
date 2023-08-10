@@ -29,6 +29,6 @@ class Countdown(ft.UserControl):
         return self.countdown
 
 def main(page: ft.Page):
-    page.add(Countdown(120), Countdown(60))
+    page.add(Countdown(120))
 
 ft.app(target=main)
