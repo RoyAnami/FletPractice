@@ -21,12 +21,14 @@ class Countdown(ft.UserControl):
 
     def dialog_open(self):
         def restart(e):
+            self.page.window_always_on_top = False
+            self.page.update()
             self.timeValue = 9
             self.flg = True
             self.seconds = self.timeValue
             self.did_mount()
 
-        #self.page.window_always_on_top = True
+        self.page.window_always_on_top = True
         dlg = ft.AlertDialog(title=ft.Text("Take a rest."),on_dismiss=restart)
         self.page.dialog = dlg
         dlg.open = True        
@@ -43,8 +45,6 @@ class Countdown(ft.UserControl):
         self.countdown.value="00:00"
         self.update()
         self.dialog_open()
-        self.page.window_always_on_top = False
-    
 
     def build(self):
         def reset(e):
@@ -84,6 +84,6 @@ def main(page: ft.Page):
     page.window_width=400
     page.window_height=300
     page.vertical_alignment=ft.MainAxisAlignment.CENTER
-    page.add(Countdown(3))
+    page.add(Countdown(1200))
 
 ft.app(target=main)
