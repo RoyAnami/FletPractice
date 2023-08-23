@@ -11,7 +11,6 @@ class Countdown(ft.UserControl):
         self.timeValue = 7
 
     def did_mount(self):
-        self.page.window_always_on_top = False
         self.running = True
         self.th = threading.Thread(target=self.update_timer, args=(), daemon=True)
         self.th.start()
@@ -23,7 +22,7 @@ class Countdown(ft.UserControl):
         def restart(e):
             self.page.window_always_on_top = False
             self.page.update()
-            self.timeValue = 9
+            self.timeValue = 1200
             self.flg = True
             self.seconds = self.timeValue
             self.did_mount()
@@ -48,8 +47,7 @@ class Countdown(ft.UserControl):
 
     def build(self):
         def reset(e):
-            self.page.window_always_on_top = False
-            self.timeValue = 5
+            self.timeValue = 1201
             self.flg = True
             if self.seconds == 0:
                 self.seconds = self.timeValue
@@ -83,6 +81,7 @@ def main(page: ft.Page):
     page.window_resizable=False
     page.window_width=400
     page.window_height=300
+    page.bgcolor=ft.colors.BLUE_GREY_200
     page.vertical_alignment=ft.MainAxisAlignment.CENTER
     page.add(Countdown(1200))
 
