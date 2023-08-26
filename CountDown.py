@@ -8,7 +8,9 @@ class Countdown(ft.UserControl):
         super().__init__()
         self.seconds = seconds
         self.flg = True
-        self.timeValue = 7
+        self.timeValue = 1200
+        self.progress = ft.ProgressBar
+        self.progress.value = self.timeValue
 
     def did_mount(self):
         self.running = True
@@ -73,7 +75,7 @@ class Countdown(ft.UserControl):
                 self.reset,
                 self.pause
             ],alignment=ft.MainAxisAlignment.CENTER)
-        ])
+        ]),
 
 def main(page: ft.Page):
     page.title="タイマーだよ～ん"
