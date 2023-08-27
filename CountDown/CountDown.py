@@ -7,10 +7,10 @@ class Countdown(ft.UserControl):
     def __init__(self, seconds):
         super().__init__()
         self.seconds = seconds
+        self.denominator = seconds
         self.flg = True
-        self.timeValue = 1200
-        self.progress = ft.ProgressBar
-        self.progress.value = self.timeValue
+        self.progress = ft.ProgressBar(width=360, color="pink")
+        self.progress.value = 1
 
     def did_mount(self):
         self.running = True
@@ -43,6 +43,7 @@ class Countdown(ft.UserControl):
             time.sleep(1)
             if self.flg == True:
                 self.seconds -= 1
+                self.progress.value = self.seconds/self.denominator
         self.countdown.value="00:00"
         self.update()
         self.dialog_open()
@@ -74,8 +75,11 @@ class Countdown(ft.UserControl):
             ft.Row([
                 self.reset,
                 self.pause
-            ],alignment=ft.MainAxisAlignment.CENTER)
-        ]),
+            ],alignment=ft.MainAxisAlignment.CENTER),
+            ft.Row([
+                self.progress
+            ],alignment=ft.MainAxisAlignment.CENTER)            
+        ])
 
 def main(page: ft.Page):
     page.title="タイマーだよ～ん"
