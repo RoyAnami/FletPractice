@@ -48,6 +48,7 @@ class Countdown(ft.UserControl):
         self.update()
         self.dialog_open()
 
+    #コメント
     def build(self):
         def reset(e):
             self.timeValue = 1201
