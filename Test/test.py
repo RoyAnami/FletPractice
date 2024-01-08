@@ -1,40 +1,29 @@
-#Original: https://flet.dev/docs/controls/charts/
+#Original: https://qiita.com/oriefield/items/29e68ba889778e2058bf
 
-import matplotlib
-import matplotlib.pyplot as plt
-import numpy as np
+def scope_test():
+    """Outer func scope"""
+    def do_local():
+        """Inner func scope"""
+        spam = "local spam"
 
-import flet as ft
-from flet.matplotlib_chart import MatplotlibChart
+    def do_nonlocal():
+        """Inner func scope"""
+        nonlocal spam
+        spam = "nonlocal spam"
 
-matplotlib.use("svg")
+    def do_global():
+        """Inner func scope"""
+        global spam
+        spam = "global spam"
 
-def main(page: ft.Page):
+    spam = "test spam"
+    do_local()
+    print("After local assignment:", spam) # not assigned
+    do_nonlocal()
+    print("After nonlocal assignment:", spam) # assigned
+    do_global()
+    print("After global assignment:", spam) # not assigned
 
-    # Fixing random state for reproducibility
-    np.random.seed(19680801)
-
-    dt = 0.01
-    t = np.arange(0, 30, dt)
-    nse1 = np.random.randn(len(t))  # white noise 1
-    nse2 = np.random.randn(len(t))  # white noise 2
-
-    # Two signals with a coherent part at 10Hz and a random part
-    s1 = np.sin(2 * np.pi * 10 * t) + nse1
-    s2 = np.sin(2 * np.pi * 10 * t) + nse2
-
-    fig, axs = plt.subplots(2, 1)
-    axs[0].plot(t, s1, t, s2)
-    axs[0].set_xlim(0, 2)
-    axs[0].set_xlabel("time")
-    axs[0].set_ylabel("s1 and s2")
-    axs[0].grid(True)
-
-    cxy, f = axs[1].cohere(s1, s2, 256, 1.0 / dt)
-    axs[1].set_ylabel("coherence")
-
-    fig.tight_layout()
-
-    page.add(MatplotlibChart(fig, expand=True))
-
-ft.app(target=main)
+"""Module scope"""
+scope_test()
+print("In global scope:", spam) # assigned
