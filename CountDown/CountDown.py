@@ -1,4 +1,5 @@
 #Original: https://flet.dev/docs/guides/python/user-controls/
+#tes
 
 import flet as ft
 import time, threading
@@ -32,7 +33,7 @@ class Countdown(ft.UserControl):
         self.page.window_always_on_top = True
         dlg = ft.AlertDialog(title=ft.Text("Take a rest."),on_dismiss=restart)
         self.page.dialog = dlg
-        dlg.open = True        
+        dlg.open = True
         self.page.update()
 
     def update_timer(self):
