@@ -1,5 +1,4 @@
 #Original: https://flet.dev/docs/guides/python/user-controls/
-#tes
 
 import flet as ft
 import time, threading
